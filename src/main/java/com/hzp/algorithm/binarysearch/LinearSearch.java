@@ -15,6 +15,7 @@ public class LinearSearch {
                 return i;
             }
         }
+        System.out.println("没找到");
         return -1;
     }
 
