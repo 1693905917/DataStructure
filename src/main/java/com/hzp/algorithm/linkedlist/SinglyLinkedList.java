@@ -17,15 +17,18 @@ import java.util.function.Consumer;
 //如果要实现迭代器遍历，首先要实现Iterable<>接口，
 // 这个接口还有个泛型 泛型呢就是说你将来要遍历出来那个值的类型
 public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedList看成单向链表整体
-    private Node head;  //头指针
+    private Node head=new Node(666,null);  //头指针  加入哨兵
+    //private Node head; //头指针  未加哨兵
 
     @Override
     public Iterator<Integer> iterator() {
         //匿名内部类
         return new NodeIterator();
     }
+
+    //迭代器遍历
     private class NodeIterator implements Iterator<Integer> {
-        Node p=head;
+        Node p=head.next;
 
         @Override
         public boolean hasNext() {//是否有下一个元素
@@ -60,10 +63,11 @@ public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedLi
      * @return:
      **/
     public void addFirst(int value){
+        insert(0,value);
         //1.链表为空
         //head=new Node(value,null);
         //2.链表非空  其实“2.链表非空”就包含了"1.链表为空"
-        head=new Node(value,head);
+        //head=new Node(value,head);
     }
 
     /*
@@ -77,7 +81,7 @@ public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedLi
     //答：要执行的操作最好不要把它写在循环里面，而是把它当成参数传递进来
     //consumer会把要执行的操作从外界传递过来
     public void loop1(Consumer<Integer> consumer){
-        Node p=head;
+        Node p=head.next;
         while(p!=null){
             consumer.accept(p.value);
             p=p.next;
@@ -86,39 +90,35 @@ public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedLi
 
     //for循环遍历
     public void loop2(Consumer<Integer> consumer){
-        for (Node p=head;p!=null; p=p.next){
+        for (Node p=head.next;p!=null; p=p.next){
             consumer.accept(p.value);
         }
     }
 
     //从头找到最后一个链表
     private Node findLast(){
-        //判断是不是空链表，就是只有head的状态
-        if(head==null){  //空链表
-            return null;
-        }
         Node p=head;
         while(p.next!=null){
             p=p.next;
         }
+//        Node p;
+//        for (p=head;p.next!=null;p=p.next){}
         return p;
     }
 
     //**尾部添加**操作
     public void addLast(int value){
         Node last = findLast();
-        //如果是空链表
-        if(last==null){  //相当于就是添加第一个链表
-            addFirst(value);
-            return;
-        }
         //在尾部添加链表
         last.next=new Node(value,null);
     }
 
+
+
     //根据索引查找相应链表
     private Node findNode(int index){
-        int i=0;
+        //确保在索引是0时，对于index - 1指向哨兵
+        int i=-1;
         for (Node p=head;p!=null;p=p.next,i++){
             if(i==index){
                 return p;
@@ -148,11 +148,10 @@ public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedLi
     //Throws:IllegalArgumentException-找不到，抛出index非法异常
     public void insert(int index,int value){
         //如果给予的index是0，则相当于向头部添加新索引
-        if(index==0){
-            addFirst(value);
-            return;
-        }
-
+//        if(index==0){
+//            addFirst(value);
+//            return;
+//        }
         Node prev = findNode(index - 1);//找到上一个节点
         if(prev==null){  //如果index是找不到的
             illegalIndex(index);
@@ -162,19 +161,20 @@ public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedLi
 
     //删除链表中第一个节点
     public void removeFirst(){
-        if(head==null){
-            illegalIndex(0);
-        }
-        head=head.next;
+        remove(0);
+//        if(head==null){
+//            illegalIndex(0);
+//        }
+//        head=head.next;
     }
 
 
     //根据索引来上传链表中相对应的节点
     public void remove(int index){
-        if(index==0){  //当索引是0
-            removeFirst();
-            return;
-        }
+//        if(index==0){  //当索引是0
+//            removeFirst();
+//            return;
+//        }
         //上一个节点
         Node prev = findNode(index - 1);
         if(prev==null){  //如果未找到相应的节点

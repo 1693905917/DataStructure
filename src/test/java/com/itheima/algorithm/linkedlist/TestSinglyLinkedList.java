@@ -48,7 +48,7 @@ public class TestSinglyLinkedList {
         list.addLast(3); //2
         list.addLast(4);
 
-        int i=list.get(10);
+        int i=list.get(3);
         System.out.println(i);
 //        for (Integer value : list) {
 //            System.out.println(value);
@@ -151,16 +151,16 @@ public class TestSinglyLinkedList {
 //            System.out.println(value);
 //        }
 
-        SinglyLinkedList list4 = new SinglyLinkedList();
-        list4.addLast(1);
-        list4.addLast(2);
-        list4.addLast(3); //2
-        list4.addLast(4);
-        list4.remove(4);
-
-        for (Integer value : list4) {
-            System.out.println(value);
-        }
+//        SinglyLinkedList list4 = new SinglyLinkedList();
+//        list4.addLast(1);
+//        list4.addLast(2);
+//        list4.addLast(3); //2
+//        list4.addLast(4);
+//        list4.remove(4);
+//
+//        for (Integer value : list4) {
+//            System.out.println(value);
+//        }
 
 
 
