@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
  * @BelongsPackage: com.hzp.algorithm.array
  * @Author: ASUS
  * @CreateTime: 2023-09-07  11:10
- * @Description: TODO
+ * @Description: TODO 动态数组
  * @Version: 1.0
  */
 public class DynamicArray implements Iterable<Integer>{
