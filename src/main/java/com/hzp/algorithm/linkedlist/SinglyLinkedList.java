@@ -95,6 +95,19 @@ public class SinglyLinkedList implements Iterable<Integer>{  //将SinglyLinkedLi
         }
     }
 
+    public void loop3(){
+        recursion(head);
+    }
+
+    private void recursion(Node curr){//curr：当前节点
+        if(curr==null){
+            return;
+        }
+        System.out.println("before:"+curr.value);
+        recursion(curr.next);
+        System.out.println("after:"+curr.value);
+    }
+
     //从头找到最后一个链表
     private Node findLast(){
         Node p=head;
