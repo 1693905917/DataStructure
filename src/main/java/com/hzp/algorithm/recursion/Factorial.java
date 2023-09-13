@@ -5,7 +5,7 @@ package com.hzp.algorithm.recursion;
  * @BelongsPackage: com.hzp.algorithm.recursion
  * @Author: ASUS
  * @CreateTime: 2023-09-13  21:45
- * @Description: TODO
+ * @Description: TODO 递归
  * @Version: 1.0
  */
 public class Factorial {
