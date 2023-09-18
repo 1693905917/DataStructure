@@ -61,7 +61,7 @@ public class E01LetCode206 {
         }
     }
     //方法3：递归
-    public ListNode reverseList(ListNode p){
+    public ListNode reverseList3(ListNode p){
         //p==null的情况：防止链表是Null
         if(p==null||p.next==null){
             return p;
@@ -75,6 +75,38 @@ public class E01LetCode206 {
         return last;
     }
 
+    //方法4
+    public ListNode reverseList4(ListNode o1){
+        //对于特殊情况的处理  1.空链表 2.一个元素
+        if(o1==null ||o1.next==null){
+            return o1;
+        }
+        ListNode o2=o1.next;
+        ListNode n1=o1;
+        while(o2!=null){
+            o1.next=o2.next;    //2.
+            o2.next=n1;         //3.
+            n1=o2;              //4.
+            o2=o1.next;         //5.
+        }
+        return n1;
+    }
+
+    //方法5
+    public ListNode reverseList(ListNode o1){
+        //对于特殊情况的处理  1.空链表 2.一个元素
+        if(o1==null || o1.next==null){
+            return o1;
+        }
+        ListNode n1=null;
+        while (o1!=null){
+            ListNode o2=o1.next;    //2.
+            o1.next=n1;             //3.
+            n1=o1;                  //4.
+            o1=o2;                  //4.
+        }
+        return n1;
+    }
 
 
     public static void main(String[] args) {
