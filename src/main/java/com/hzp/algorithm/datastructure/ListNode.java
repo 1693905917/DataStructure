@@ -35,4 +35,15 @@ public class ListNode {
         sb.append("]");
         return sb.toString();
     }
+    //创建新链表并且赋值
+    public static ListNode of(int... elements) {
+        if (elements.length == 0) {
+            return null;
+        }
+        ListNode p = null;
+        for (int i = elements.length - 1; i >= 0; i--) {
+            p = new ListNode(elements[i], p);
+        }
+        return p;
+    }
 }
