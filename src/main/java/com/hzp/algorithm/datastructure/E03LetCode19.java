@@ -19,7 +19,7 @@ public class E03LetCode19 {
         //设置哨兵s  ：为了是对于1也能够获取相应的索引数  如果不加哨兵 我们就不知道最前面的数的索引位置
         ListNode s = new ListNode(-1, head);
         recursion(s,n);
-        return head;
+        return s.next;
     }
 
     private int recursion(ListNode p,int n){
@@ -54,9 +54,9 @@ public class E03LetCode19 {
     }
 
     public static void main(String[] args) {
-        ListNode head = ListNode.of(1, 2, 3, 4, 5);
+        ListNode head = ListNode.of(1);
         System.out.println(head);
-        System.out.println(new E03LetCode19().removeNthFromEnd(head,5));
+        System.out.println(new E03LetCode19().removeNthFromEnd1(head,1));
     }
 
 }
