@@ -47,21 +47,18 @@ public class E05LetCode82 {
         }
         ListNode s=new ListNode(-1,p);
         ListNode p1=s;
-        ListNode p2=p1.next;
-        ListNode p3=p2.next;
+        ListNode p2;
+        ListNode p3;
 
-        while (p2!=null && p3!=null){
+        while ((p2=p1.next)!=null && (p3=p2.next)!=null){
             if(p2.value==p3.value){//如果相等，咱们就移动p3
                 while (p3!=null&&p2.value==p3.value){
                     p3=p3.next;
                 }
                 p1.next=p3;
-                p2=p1.next;
-                p3=p2.next;
+
             }else {
                p1=p1.next;
-               p2=p1.next;
-               p3=p2.next;
             }
         }
         return s.next;
@@ -69,7 +66,7 @@ public class E05LetCode82 {
 
 
     public static void main(String[] args) {
-        ListNode head = ListNode.of(1, 2, 3, 3,4,4,5);
+        ListNode head = ListNode.of(1,1);
         System.out.println(head);
         System.out.println(new E05LetCode82().deleteDuplication(head));
     }
