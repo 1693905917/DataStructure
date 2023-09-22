@@ -41,6 +41,7 @@ public class E06LetCode21 {
         }
         return s.next;
     }
+
     //方法2：递归
     public ListNode mergeTwoLists(ListNode p1,ListNode p2){
         if(p1==null){
