@@ -1,6 +1,7 @@
 package com.hzp.algorithm.array;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * @BelongsProject: arithmetic
@@ -13,12 +14,14 @@ import java.util.Arrays;
 public class E01Merge2SortedArray {
 
     public static void main(String[] args) {
-        int[] a1 ={1,5,6,2,4,10,11};
-        int[] a2=new int[a1.length];
-        merge(a1,0,2,3,6,a2);
-        System.out.println(Arrays.toString(a2));
-        System.arraycopy(a2,0,a1,0,a2.length);
-        System.out.println(Arrays.toString(a1));
+//        int[] a1 ={1,5,6,2,4,10,11};
+//        int[] a2=new int[a1.length];
+//        merge(a1,0,2,3,6,a2);
+//        System.out.println(Arrays.toString(a2));
+//        System.arraycopy(a2,0,a1,0,a2.length);
+//        System.out.println(Arrays.toString(a1));
+//        System.out.println(4+8+"Hello,world!");
+        System.out.println(4 + 5 + "" + 3 + 6);
 
     }
 
