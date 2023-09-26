@@ -7,23 +7,21 @@ import java.util.Iterator;
  * @BelongsPackage: com.hzp.algorithm.queue
  * @Author: ASUS
  * @CreateTime: 2023-09-25  11:26
- * @Description: TODO  环形数组实现1.0
+ * @Description: TODO  环形数组实现2.0
  * @Version: 1.0
  */
-//仅用head,tail判断空满，head,tail即为索引值
-public class ArrayQueue1<E> implements Queue<E>, Iterable<E>{
+//修改在数组满的时候，不用给尾指针留个位置
+public class ArrayQueue2<E> implements Queue<E>, Iterable<E>{
 
     private int head = 0;
     private int tail = 0;
     private  final E[] array;
-    //private  final int length;
+    private  int size=0;//元素个数
 
     //SuppressWarnings:抑制警告
     @SuppressWarnings("all")
-    public ArrayQueue1(int capacity) {
-        //你设定的容量+1：在你添加满容量时，需要有多出一个的位置给尾指针
-        //length = capacity + 1;
-        array = (E[]) new Object[ capacity + 1];
+    public ArrayQueue2(int capacity) {
+        array = (E[]) new Object[ capacity ];//这个时候就不需要给尾指针留个位置
     }
 
     @Override
@@ -34,6 +32,7 @@ public class ArrayQueue1<E> implements Queue<E>, Iterable<E>{
         array[tail] = value;
         //当加到数组最大索引位置时，应该让tail=数组初始索引位置0
         tail = (tail + 1) % array.length;
+        size++;
         return true;
     }
 
@@ -45,6 +44,7 @@ public class ArrayQueue1<E> implements Queue<E>, Iterable<E>{
         E value = array[head];
         //当加到数组最大索引位置时，应该让tail=数组初始索引位置0
         head = (head + 1) % array.length;
+        size--;
         return value;
     }
 
@@ -58,27 +58,29 @@ public class ArrayQueue1<E> implements Queue<E>, Iterable<E>{
 
     @Override
     public boolean isEmpty() {
-        return tail == head;
+        return size==0;
     }
 
     @Override
     public boolean isFull() {
-        return (tail + 1) % array.length == head;
+        return size== array.length;
     }
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             int p = head;
+            int count=0;//记录循环个数
             @Override
             public boolean hasNext() {
-                return p != tail;
+                return count<size;  //当size==count时，就退出循环
             }
 
             @Override
             public E next() {
                 E value = array[p];
                 p = (p + 1) % array.length;
+                count++;
                 return value;
             }
         };

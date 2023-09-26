@@ -1,5 +1,7 @@
 package com.hzp.algorithm.array;
 
+import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -12,28 +14,87 @@ import java.util.Stack;
  * @Version: 1.0
  */
 public class StackExample {
-        public static void main(String[] args) {
-            int n;
-            Scanner sc=new Scanner(System.in);
-            n=sc.nextInt();
-            int a[]=new int[n+1];
-            int i,end,j,xh,caozuo;
-            end=0;
-            for(i=1;i<=n;i++){
-                caozuo=sc.nextInt();
-                if(caozuo==0){
-                    if(end==0){
-                        System.out.println("invalid");
-                    }else{
-                        System.out.println(a[end]);
-                        end--;
-                    }
+    private static ArrayDeque<Integer> stack;
+    // private int[] stack;
+    // private int top;
+
+    public StackExample(){
+        stack=new ArrayDeque<>();
+    }
+
+    public void push(int d){
+        stack.addLast(d);
+    }
+    public void pop(){
+        if(!stack.isEmpty()){
+            System.out.println(stack.removeLast());
+        }else{
+            System.out.println("invalid");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        Stack<Integer> stack=new Stack<>();
+        for(int i=0;i<n;i++){
+            int operation=sc.nextInt();
+            if(operation==1){
+                int value=sc.nextInt();
+                stack.push(value);
+            }else if(operation==0){
+                if(!stack.isEmpty()){
+                    System.out.println(stack.pop());
                 }else{
-                    xh=sc.nextInt();
-                    end++;
-                    a[end]=xh;
+                    System.out.println("invalid");
                 }
             }
+        }
+        sc.close();
+        while(!stack.isEmpty()){
+            System.out.println(stack.pop());
+        }
+//            Scanner sc=new Scanner(System.in);
+//            int n=sc.nextInt();
+//            int[][] operations=new int[n][2];
+//            for(int i=0;i<n;i++){
+//                operations[i][0]=sc.nextInt();
+//                if(operations[i][0]==1){
+//                    operations[i][1]=sc.nextInt();
+//                }
+//            }
+//            StackExample stack=new StackExample();
+//            for(int i=0;i<n;i++){
+//                if(operations[i][0]==1){
+//                    stack.push(operations[i][1]);
+//                }else{
+//                    stack.pop();
+//                }
+//            }
+
+
+//            int n;
+//            Scanner sc=new Scanner(System.in);
+//            n=sc.nextInt();
+//            int a[]=new int[n+1];
+//            int i,end,j,xh,caozuo;
+//            end=0;
+//            for(i=1;i<=n;i++){
+//                caozuo=sc.nextInt();
+//                if(caozuo==0){
+//                    if(end==0){
+//                        System.out.println("invalid");
+//                    }else{
+//                        System.out.println(a[end]);
+//                        end--;
+//                    }
+//                }else{
+//                    xh=sc.nextInt();
+//                    end++;
+//                    a[end]=xh;
+//                }
+//            }
+
 //            Scanner scanner = new Scanner(System.in);
 //            int n = scanner.nextInt();
 //            Stack<Integer> stack = new Stack<>();
