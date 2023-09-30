@@ -7,11 +7,10 @@ import java.util.LinkedList;
  * @BelongsPackage: com.hzp.algorithm.datastructure
  * @Author: ASUS
  * @CreateTime: 2023-09-29  14:43
- * @Description: TODO
+ * @Description: TODO 逆波兰表达式求值
  * @Version: 1.0
  */
 public class E02LetCode150 {
-
     /*
 什么叫中缀、后缀？
 答：  1 + 2  ：中缀
