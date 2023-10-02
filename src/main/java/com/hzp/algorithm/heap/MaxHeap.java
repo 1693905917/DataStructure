@@ -150,9 +150,25 @@ public class MaxHeap {
     }
 
     public static void main(String[] args) {
+//        int[] array = {1, 2, 3, 4, 5, 6, 7};
+//        MaxHeap maxHeap = new MaxHeap(array);
+//        System.out.println(Arrays.toString(maxHeap.array));
 
+        //TODO 利用堆来实现排序
+        //1. heapify 建立大顶堆
+        //2. 将堆顶与堆底交换（最大元素被交换到堆底），缩小并下潜调整堆
+        //3. 重复第二步直至堆里剩一个元素
         int[] array = {1, 2, 3, 4, 5, 6, 7};
+        //1. heapify 建立大顶堆
         MaxHeap maxHeap = new MaxHeap(array);
+        System.out.println(Arrays.toString(maxHeap.array));
+        //3. 重复第二步直至堆里剩一个元素
+        while(maxHeap.size>1){
+            //将堆顶与堆底交换（最大元素被交换到堆底），缩小并下潜调整堆
+            maxHeap.swap(0, maxHeap.size-1);
+            maxHeap.size--;
+            maxHeap.down(0);
+        }
         System.out.println(Arrays.toString(maxHeap.array));
     }
 }
