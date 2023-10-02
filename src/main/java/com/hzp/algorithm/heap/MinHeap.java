@@ -53,6 +53,10 @@ public class MinHeap {
         return false;
     }
 
+    public boolean isFull(){
+        return size==array.length;
+    }
+
     /**
      * 删除指定索引处元素  这个方法与删除堆顶元素方法思路一样
      *
