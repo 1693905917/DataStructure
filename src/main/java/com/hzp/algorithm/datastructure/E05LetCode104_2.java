@@ -19,7 +19,7 @@ public class E05LetCode104_2 {
   */
     public int maxDepth(TreeNode root) {
         TreeNode curr = root;
-        LinkedList<TreeNode> stack = new LinkedList<>();
+        LinkedList<TreeNode> stack = new LinkedList<>(); //LinkedList既可以做为双向链表、队列、栈
         int max = 0;
         TreeNode pop = null;
         while (curr != null || !stack.isEmpty()) {
