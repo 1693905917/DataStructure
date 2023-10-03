@@ -24,6 +24,8 @@ public class LinkedListStack<E> implements Stack<E>,Iterable<E>{
             this.next = next;
         }
     }
+    public LinkedListStack() {
+    }
 
     public LinkedListStack(int capacity) {
         this.capacity = capacity;
