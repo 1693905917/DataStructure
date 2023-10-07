@@ -1,5 +1,7 @@
 package com.hzp.algorithm.binarysearchtree;
 
+import java.util.ArrayList;
+
 /**
  * @BelongsProject: arithmetic
  * @BelongsPackage: com.hzp.algorithm.binarysearchtree
@@ -343,6 +345,62 @@ public class BSTTree1 {
         } else {
             parent.right = child;
         }
+    }
+    /**
+     * <h3>根据关键字删除</h3>
+     *
+     * @param key 关键字
+     * @return 被删除关键字对应值  是删除单个节点，当该节点被删除，则它的子节点将会与该节点的父类节点进行连接
+     */
+
+    public Object remove(int key) {
+        ArrayList<Object> result = new ArrayList<>(); // 保存被删除节点的值
+        root = doRemove(root, key, result);
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+
+        /*
+              4
+             / \
+            2   6
+           /     \
+          1       7
+
+        node 起点
+        返回值 删剩下的孩子(找到) 或 null(没找到)
+     */
+    //递归实现删除操作  BSTNode node:我要删除时，从哪个节点开始删除  node是起点
+    private BSTNode doRemove(BSTNode node, int key, ArrayList<Object> result) {
+        //1.没有找到的情况：
+        if (node == null) {
+            return null;
+        }
+        //2.找到的情况：
+        if (key < node.key) {//向左查找
+            node.left = doRemove(node.left, key, result);
+            return node;
+        }
+        if (node.key < key) {//向右查找
+            node.right = doRemove(node.right, key, result);
+            return node;
+        }
+        result.add(node.value);
+        if (node.left == null) { // 情况1 - 只有右孩子
+            return node.right;
+        }
+        if (node.right == null) { // 情况2 - 只有左孩子
+            return node.left;
+        }
+        //s：后继节点
+        BSTNode s = node.right; // 情况3 - 有两个孩子
+        while (s.left != null) {
+            s = s.left;
+        }
+        //while循环结束以后，找到了后继节点
+        s.right = doRemove(node.right, s.key, new ArrayList<>());
+        s.left = node.left;
+        return s;
     }
 
 
