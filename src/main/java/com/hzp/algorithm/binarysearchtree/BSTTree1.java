@@ -1,6 +1,8 @@
 package com.hzp.algorithm.binarysearchtree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @BelongsProject: arithmetic
@@ -403,6 +405,84 @@ public class BSTTree1 {
         return s;
     }
 
+    // 找 < key 的所有 value
+    /*
+             4
+           /   \
+          2     6
+         / \   / \
+        1   3 5   7
+ */
+//解题思路：我们利用中序遍历的特性：遍历出来的都是升序的结果
+    public List<Object> less(int key) { //当我们输入的是6
+        //result：将符合条件的加入到result中
+        ArrayList<Object> result = new ArrayList<>();
+        //中序遍历过程：
+        BSTNode p = root;
+        LinkedList<BSTNode> stack = new LinkedList<>();
+        while (p != null || !stack.isEmpty()) {
+            if (p != null) {
+                stack.push(p);
+                p = p.left;
+            } else {
+                BSTNode pop = stack.pop();
+                if (pop.key < key) {
+                    result.add(pop.value);
+                } else {
+                    //当我们遇到比key大的分支时，该分支的子分支就没必要多此一举的进行判断，直接跳出
+                    //比如：当key=6，那么我们6右节点就不需要多此一举的去判断，而是直接跳出
+                    break;
+                }
+                p = pop.right;
+            }
+        }
+        return result;
+    }
+
+    //找 > key 的所有 value
+    public List<Object> greater(int key) {
+        ArrayList<Object> result = new ArrayList<>();
+        BSTNode p = root;
+        //RNL 遍历:得到的是降序的结果
+        LinkedList<BSTNode> stack = new LinkedList<>();
+        while (p != null || !stack.isEmpty()) {
+            if (p != null) {
+                stack.push(p);
+                p = p.right;
+            } else {
+                BSTNode pop = stack.pop();
+                if (pop.key > key) {
+                    result.add(pop.value);
+                } else {
+                    break;
+                }
+                p = pop.left;
+            }
+        }
+        return result;
+    }
+
+    //找 >= key1 且 <= key2 的所有值
+    public List<Object> between(int key1, int key2) {
+        ArrayList<Object> result = new ArrayList<>();
+        BSTNode p = root;
+        LinkedList<BSTNode> stack = new LinkedList<>();
+        while (p != null || !stack.isEmpty()) {
+            if (p != null) {
+                stack.push(p);
+                p = p.left;
+            } else {
+                BSTNode pop = stack.pop();
+                if (pop.key >= key1 && pop.key <= key2) {
+                    result.add(pop.value);
+                } else if (pop.key > key2) {
+                    break;
+                }
+                p = pop.right;
+            }
+        }
+        return result;
+    }
 
 
 
