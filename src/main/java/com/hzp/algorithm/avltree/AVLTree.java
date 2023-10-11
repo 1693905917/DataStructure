@@ -108,5 +108,76 @@ public class AVLTree {
         return node;
     }
 
+    //新增操作
+    AVLNode root;
+    public void put(int key, Object value) {
+        root = doPut(root, key, value);
+    }
+    //传来的根节点
+    private AVLNode doPut(AVLNode node, int key, Object value) {
+        //1.找到空位  创建新节点
+        if (node == null) {
+            return new AVLNode(key, value);
+        }
+        //2.Key已存在，则更新
+        if (key == node.key) {
+            node.value = value;
+            return node;
+        }
+        if (key < node.key) {
+            node.left = doPut(node.left, key, value);
+        } else {
+            node.right = doPut(node.right, key, value);
+        }
+        updateHeight(node);
+        return balance(node);
+    }
+
+    //删除
+    public void remove(int key) {
+        root = doRemove(root, key);
+    }
+
+    //node:传入的根节点
+    private AVLNode doRemove(AVLNode node, int key) {
+        // 1. node == null
+        if (node == null) {
+            return null;
+        }
+        // 2. 没找到 key
+        if (key < node.key) {
+            node.left = doRemove(node.left, key);
+        } else if (node.key < key) {
+            node.right = doRemove(node.right, key);
+        } else {
+            // 3. 找到 key  1) 没有孩子 2) 只有一个孩子 3) 有两个孩子
+            if (node.left == null && node.right == null) { //1) 没有孩子
+                return null;
+            } else if (node.left == null) { //2) 只有一个孩子
+                node = node.right;
+            } else if (node.right == null) {//2) 只有一个孩子
+                node = node.left;
+            } else { //3) 有两个孩子
+                AVLNode s = node.right; //初始是待删除的右子树
+                //当后继节点与待删除节点不是相邻的
+                while (s.left != null) {
+                    s = s.left;
+                }
+                //找到后继节点:s
+                s.right = doRemove(node.right, s.key);//如果后继节点也有孩子，要把后继节点的孩子处理好
+                s.left = node.left;
+                //后继节点代替待删除节点
+                node = s;
+            }
+        }
+        if (node == null) {
+            return null;
+        }
+        // 4. 更新高度
+        updateHeight(node);
+        // 5. balance
+        return balance(node);
+    }
+
 
 }
