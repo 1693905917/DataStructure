@@ -53,5 +53,19 @@ public class BTree {
             }
             return children[i].get(key);
         }
+
+        //解题方法：向[1,3,5]中插入个"2"
+        //先将[1,3,5]中[3,5]集体向后移动一位[1, ,3,5]，然后再将"2"插入到空位
+        //向keys指定索引index处插入key
+        void insertKey(int key, int index) {
+            System.arraycopy(keys, index, keys, index + 1, keyNumber - index);
+            keys[index] = key;
+            keyNumber++;
+        }
+
+        void insertChild(Node child, int index) {
+            System.arraycopy(children, index, children, index + 1, keyNumber - index);
+            children[index] = child;
+        }
     }
 }
